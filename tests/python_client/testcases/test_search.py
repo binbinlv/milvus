@@ -3322,9 +3322,9 @@ class TestCollectionSearch(TestcaseBase):
         for search_param in search_params:
             log.info(search_param)
             if index == "HNSW":
-                limit = search_param["params"]["ef"]
-                if limit > max_limit:
-                    limit = default_nb
+                ef = search_param["params"]["ef"]
+                if ef < limit:
+                    limit = ef
             if index == "DISKANN":
                 limit = search_param["params"]["search_list"]
             collection_w.search(vectors[:1], default_search_field,
